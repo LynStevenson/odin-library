@@ -1,0 +1,24 @@
+* {
+	box-sizing: border-box;
+}
+
+table {
+	border-collapse: collapse;
+}
+
+th, td {
+	border: 1px solid black;
+	height: 20px;
+}
+
+tr:nth-child(odd){
+	background-color: #eee;
+}
+
+tr:nth-child(even){
+	background-color: #ddd;
+}
+
+th {
+	background-color: #ccc;
+}

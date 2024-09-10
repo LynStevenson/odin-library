@@ -2,9 +2,46 @@
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
-	<title>Document</title>
+	<title>Library</title>
+	<link rel="stylesheet" href="style.css">
 </head>
 <body>
-	
+	<button class="addBook">Add book</button>
+	<dialog>
+		<form action="">
+			<label for="title">Title: </label>
+			<input type="text" id="title" name="title">
+			<label for="author">Author: </label>
+			<input type="text" id="author" name="author">
+			<label for="pages">Pages: </label>
+			<input type="number" name="pages" id="pages">
+			<label for="read">Read it already?</label>
+			<input type="checkbox" name="read" id="read">
+			<button class="submit">Submit</button>
+			<button class="close" formmethod="dialog">Close</button>
+		</form>
+	</dialog>
+	<table>
+		<caption>Book Collection</caption>
+		<thead>
+			<th scope="col">title</th>
+			<th scope="col">author</th>
+			<th scope="col">pages</th>
+			<th scope="col">read?</th>
+		</thead>
+		<tr>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+		</tr>
+		<tr>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+		</tr>
+	</table>
+	<script src="script.js"></script>
 </body>
 </html>

@@ -9,6 +9,8 @@ table {
 th, td {
 	border: 1px solid black;
 	height: 20px;
+	padding: 0 10px;
+	text-align: center;
 }
 
 tr:nth-child(odd){

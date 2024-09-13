@@ -15,13 +15,26 @@ const Book = function(title, author, pages, read){
 }
 
 const table = document.querySelector("table");
+
 const displayBooks = function(){
-	let newEntry = table.insertRow();
-	let newBook = myLibrary.at(-1);
-	newEntry.insertCell().textContent = newBook.title;
-	newEntry.insertCell().textContent = newBook.author;
-	newEntry.insertCell().textContent = newBook.pages;
-	newEntry.insertCell().textContent = newBook.read;
+	if (table.tBodies[0]) table.tBodies[0].remove();
+	table.createTBody();
+	const tbody = table.tBodies[0];
+	for (const book of myLibrary) {
+		const newEntry = tbody.insertRow();
+		const delCell = newEntry.insertCell();
+		const delButton = document.createElement("button");
+		delButton.setAttribute("type", "button");
+		delButton.textContent = "Remove";
+		delButton.addEventListener("click", () => {
+			table.deleteRow(newEntry.rowIndex);
+		})
+		delCell.appendChild(delButton);
+		newEntry.insertCell().textContent = book.title;
+		newEntry.insertCell().textContent = book.author;
+		newEntry.insertCell().textContent = book.pages;
+		newEntry.insertCell().textContent = book.read;
+	};
 }
 
 const addBookToLibrary = function(book){
@@ -36,7 +49,7 @@ const form = document.querySelector("form");
 
 submitter.addEventListener("click", (e) => {
 	e.preventDefault();
-	let newBook = []
+	let newBook = [];
 	elements = Array.from(form.elements);
 	for (let x of elements){
 		if (x.name === "read") {
@@ -47,8 +60,8 @@ submitter.addEventListener("click", (e) => {
 			return;
 		}
 	}
-	newBook = new Book(...newBook)
-	addBookToLibrary(newBook)
+	newBook = new Book(...newBook);
+	addBookToLibrary(newBook);
 })
 
 bookButton.addEventListener("click", () => {

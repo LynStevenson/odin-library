@@ -20,20 +20,26 @@ const displayBooks = function(){
 	if (table.tBodies[0]) table.tBodies[0].remove();
 	table.createTBody();
 	const tbody = table.tBodies[0];
+	let index = 0;
 	for (const book of myLibrary) {
 		const newEntry = tbody.insertRow();
 		const delCell = newEntry.insertCell();
+
 		const delButton = document.createElement("button");
 		delButton.setAttribute("type", "button");
 		delButton.textContent = "Remove";
-		delButton.addEventListener("click", () => {
-			table.deleteRow(newEntry.rowIndex);
+		delButton.savedIndex = index;
+		delButton.addEventListener("click", function() {
+			myLibrary.splice(this.savedIndex, 1);
+			displayBooks();
 		})
+
 		delCell.appendChild(delButton);
 		newEntry.insertCell().textContent = book.title;
 		newEntry.insertCell().textContent = book.author;
 		newEntry.insertCell().textContent = book.pages;
 		newEntry.insertCell().textContent = book.read;
+		index++;
 	};
 }
 

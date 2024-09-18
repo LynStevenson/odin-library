@@ -24,21 +24,40 @@ const displayBooks = function(){
 	for (const book of myLibrary) {
 		const newEntry = tbody.insertRow();
 		const delCell = newEntry.insertCell();
-
 		const delButton = document.createElement("button");
 		delButton.setAttribute("type", "button");
 		delButton.textContent = "Remove";
 		delButton.savedIndex = index;
+
 		delButton.addEventListener("click", function() {
 			myLibrary.splice(this.savedIndex, 1);
-			displayBooks();
+			this.parentElement.parentElement.remove();
 		})
 
 		delCell.appendChild(delButton);
 		newEntry.insertCell().textContent = book.title;
 		newEntry.insertCell().textContent = book.author;
 		newEntry.insertCell().textContent = book.pages;
-		newEntry.insertCell().textContent = book.read;
+		
+		const readCell = newEntry.insertCell();
+		readCell.textContent = book.read;
+		const readCheckbox = document.createElement("input");
+		readCheckbox.savedIndex = index;
+		readCheckbox.setAttribute("type", "checkbox");
+		readCheckbox.checked = book.read == "read" ? true : false;
+
+		readCheckbox.addEventListener("change", function() {
+			if (this.previousSibling.textContent == "read"){
+				this.previousSibling.textContent = "unread";
+				myLibrary[this.savedIndex].read = "unread";
+			} else {
+				this.previousSibling.textContent = "read";
+				myLibrary[this.savedIndex].read = "read";
+			}
+		})
+
+		readCell.appendChild(readCheckbox);
+
 		index++;
 	};
 }
@@ -74,6 +93,6 @@ bookButton.addEventListener("click", () => {
 	dialog.showModal();
 })
 
-const Hobbit = new Book("The Hobbit", "J.R.R. Tolkien", 295, false);
+const Hobbit = new Book("The Hobbit", "J.R.R. Tolkien", 295, true);
 
 addBookToLibrary(Hobbit);
